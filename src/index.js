@@ -1,17 +1,19 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import AuthRouter from './routes';
+import { router } from "./routes"
+import connect from "./models/db";
 
-//mongoose.connect('mongodb://localhost:27017/test',
-//{useNewUrlParser: true, useUnifiedTopology: true});
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-AuthRouter(app);
+// use the routes
+app.use(router)
 
-app.get('/', (req, res) => {
-    res.send('ÖncEgitim Rest API');
-});
+let mongooseuri = "mongodb+srv://emre:<password>@oncegitim.lc7ns.mongodb.net/<dbname>?retryWrites=true&w=majority";
 
-app.listen(3300, () => console.log("ÇALIŞTI..."))
+
+app.listen(3300, () => {
+    console.log("Çalıştı!");
+    // connect(mongooseuri);
+})

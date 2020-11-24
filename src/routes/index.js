@@ -1,5 +1,12 @@
-import AuthRouter from './auth/auth.router';
-const AppRoutes = (app) => {
-    app.use(AuthRouter.routePrefix, AuthRouter.route());
-}
-export default AppRoutes;
+import { Router } from "express"
+const router = Router();
+
+import AuthRoutes from "./auth.router"
+
+router.use("/", AuthRoutes);
+
+router.get("/", (req, res) => {
+    res.send("Anasayfa");
+})
+
+export { router }
